@@ -4,14 +4,23 @@ from decouple import config
 WEATHER_API_KEY = config('WEATHER')
 
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
-CITY= "Basra, IQ"
-# lon = "44.361488"
-# lat = "33.312805"
-lon = "47.783489"
-lat = "30.508102"
+
+
+class City:
+    def __init__(self,name,lon,lat):
+        self.name = name #name of the city
+        self.lon = lon #longitude 
+        self.lat = lat #latitude
+
+
+basra = City("Basra ,IQ","47.783489","30.508102")
+
+baghdad = City("Baghdad, IQ","44.361488","30.508102")
+
+
 
 limit = 5
-URL = BASE_URL + "lat=" + lat + "&lon=" + lon +"&lang=ar"+"&units=metric"+ "&appid=" + WEATHER_API_KEY
+URL = BASE_URL + "lat=" + basra.lat + "&lon=" + basra.lon +"&lang=ar"+"&units=metric"+ "&appid=" + WEATHER_API_KEY
 
 # HTTP request
 def getCurrentWeather():
@@ -39,7 +48,7 @@ def getCurrentWeather():
         # print(f"report : {report[0]['description']} ")
         
         return f""" \n
-        {CITY:-^30} \n
+        {basra.name:-^30} \n
         درجة الحرارة : {temperature} °C\n
         الرطوبة : {humidity} %\n
         الضغط : {pressure} hPa\n
