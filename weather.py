@@ -12,6 +12,7 @@ class City:
         self.lon = lon #longitude 
         self.lat = lat #latitude
 
+#تكدر تعرف اي مدينة من هذا الكلاس
 
 basra = City("Basra ,IQ","47.783489","30.508102")
 
