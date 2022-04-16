@@ -17,34 +17,15 @@ def welcome(message):
 
 #answering every message not just commands 
 def isMSg(message):
-    words = message.text.split()
-    if len(words) >= 2 :
-        return False
-    else:
-        return True
-# if its not normal msg maybe it is a command
+    return True
 
-def isCommand(message):
-    words = message.text.split()
-    if len(words) < 2 :
-        return False # its not a command
-    else:
-        return True
-
-# handles commands
-@bot.message_handler(func=isCommand)
-def do(message):
-    words = message.text.split()
-    if words[0] in weather or words[1] in weather:
-        report = getCurrentWeather()
-        return bot.send_message(message.chat.id,report or "failed to get weather")
-    
-    else: #handling defualt state
-        return bot.reply_to(message,"I don't understand you!")
 
 @bot.message_handler(func=isMSg)
 def reply(message):
     words = message.text.split()
+    if words[0].lower() in weather :
+        report = getCurrentWeather()
+        return bot.send_message(message.chat.id,report or "failed to get weather !!")
     if words[0].lower() in whoAreYou :
         return bot.reply_to(message,f"i am {botName}")
     if words[0].lower() in greetings :
